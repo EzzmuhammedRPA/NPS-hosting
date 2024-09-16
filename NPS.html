@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-fill Microsoft Form</title>
+</head>
+<body>
+    <h1>Pre-fill Microsoft Form with Dynamic ID</h1>
+
+    <!-- Microsoft Form embedded in an iframe -->
+    <iframe id="msForm" 
+            width="640px" 
+            height="800px" 
+            src="https://forms.office.com/Pages/ResponsePage.aspx?id=oLP7BFp_zEKwLkWLuHw2b0JHCiK0DEpKkEeU--zgIjVUNFJEUlZERzg0WUpHNU1XUFBXMExLRVhPQS4u" 
+            frameborder="0">
+    </iframe>
+
+    <script>
+        // Function to get the query parameter from the URL
+        function getQueryParam(param) {
+            let params = new URLSearchParams(window.location.search);
+            return params.get(param);
+        }
+
+        // Function to update the form URL with the pre-filled ID
+        function prefillForm() {
+            const id = getQueryParam('10074'); // Get the '10074' parameter from the URL
+            if (id) {
+                const formFrame = document.getElementById('msForm');
+                const formUrl = formFrame.src;
+
+                // Update iframe's source URL to include the ID in the form field
+                // This assumes the question field related to the ID is in position Q1 (adjust it as needed)
+                const updatedUrl = formUrl + '&Q1=' + id;
+
+                // Update iframe's source to include the pre-filled ID
+                formFrame.src = updatedUrl;
+            }
+        }
+
+        // Run the pre-fill function when the page loads
+        window.onload = prefillForm;
+    </script>
+</body>
+</html>
