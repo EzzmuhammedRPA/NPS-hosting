@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-fill Microsoft Form</title>
+</head>
+<body>
+    <h1>Pre-fill Microsoft Form with Dynamic ID</h1>
+
+    <!-- Microsoft Form embedded in an iframe -->
+    <iframe id="msForm" 
+            width="640px" 
+            height="800px" 
+            src="https://forms.office.com/Pages/ResponsePage.aspx?id=oLP7BFp_zEKwLkWLuHw2b0JHCiK0DEpKkEeU--zgIjVUNFJEUlZERzg0WUpHNU1XUFBXMExLRVhPQS4u" 
+            frameborder="0">
+    </iframe>
+
+    <script>
+        // Function to get the query parameter from the URL
+        function getQueryParam(param) {
+            let params = new URLSearchParams(window.location.search);
+            return params.get(param);
+        }
+
+        // Function to update the form URL with the pre-filled ra0eaf9d505e24feba743977f48e62220 value
+        function prefillForm() {
+            const id = getQueryParam('ra0eaf9d505e24feba743977f48e62220'); // Get the dynamic field 'ra0eaf9d505e24feba743977f48e62220'
+            if (id) {
+                const formFrame = document.getElementById('msForm');
+                const formUrl = formFrame.src;
+
+                // Append the ID to the Microsoft Form's URL
+                const updatedUrl = formUrl + '&ra0eaf9d505e24feba743977f48e62220=' + id;
+
+                // Update iframe's source to include the pre-filled ID
+                formFrame.src = updatedUrl;
+            }
+        }
+
+        // Run the pre-fill function when the page loads
+        window.onload = prefillForm;
+    </script>
+</body>
+</html>
